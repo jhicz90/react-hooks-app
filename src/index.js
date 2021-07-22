@@ -1,17 +1,22 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Padre } from './components/07-tarea-memo/Padre';
+// import { CallbackHook } from './components/CallbackHook';
+// import { MemoHook } from './components/MemoHook';
+// import { CounterApp } from './components/CounterApp';
+// import { HookApp } from './HookApp'
+// import { CounterCustomHook } from './components/CounterCustomHook';
+// import { SimpleForm } from './components/SimpleForm';
+// import { SimpleFormCustomHook } from './components/SimpleFormCustomHook';
+// import { MultipleCustomHook } from './components/MultipleCustomHook';
+// import { FocusScreen } from './components/FocusScreen';
+// import { RealUseRef } from './components/RealUseRef';
+// import { LayoutEffect } from './components/LayoutEffect';
+// import { Memorize } from './components/Memorize';
+
+import './index.css'
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Padre />,
   document.getElementById('root')
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
