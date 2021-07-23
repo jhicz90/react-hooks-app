@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Padre } from './components/07-tarea-memo/Padre';
+import { TodoApp } from './components/TodoApp';
+// import { Padre } from './components/07-tarea-memo/Padre';
 // import { CallbackHook } from './components/CallbackHook';
 // import { MemoHook } from './components/MemoHook';
 // import { CounterApp } from './components/CounterApp';
@@ -17,6 +18,6 @@ import { Padre } from './components/07-tarea-memo/Padre';
 import './index.css'
 
 ReactDOM.render(
-  <Padre />,
+  <TodoApp />,
   document.getElementById('root')
 );
