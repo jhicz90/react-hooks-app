@@ -1,5 +1,6 @@
 import React, { useEffect, useReducer } from 'react'
-import { UseForm } from '../hooks/UseForm'
+import { TodoAdd } from './TodoAdd'
+import { TodoList } from './TodoList'
 import { TodoReducer } from './TodoReducer'
 
 // const initialState = [{
@@ -21,7 +22,6 @@ const init = () => {
 export const TodoApp = () => {
 
     const [tasks, dispatch] = useReducer(TodoReducer, [], init)
-    const [{ desc }, handleInputChange, reset] = UseForm({ desc: '' })
 
     // console.log(desc)
 
@@ -29,22 +29,8 @@ export const TodoApp = () => {
         localStorage.setItem('tasks', JSON.stringify(tasks))
     }, [tasks])
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
-
-        const newTask = {
-            id: new Date().getTime(),
-            desc,
-            done: false
-        }
-
-        const action = {
-            type: 'add',
-            payload: newTask
-        }
-
+    const handleTaskAdd = (action) => {
         dispatch(action)
-        reset()
     }
 
     const handleDelete = (taskId) => {
@@ -72,41 +58,17 @@ export const TodoApp = () => {
                     <h4>{tasks.length} Tarea{tasks.length > 1 ? 's' : ''}</h4>
                 </div>
                 <div className="col-10">
-                    <form onSubmit={handleSubmit}>
-                        <div className="input-group mb-3">
-                            <input
-                                name="desc"
-                                type="text"
-                                className="form-control"
-                                placeholder="Nueva tarea..."
-                                autoComplete="off"
-                                onChange={handleInputChange}
-                                value={desc} />
-                            <button className="btn btn-outline-primary" type="submit">Agregar</button>
-                        </div>
-                    </form>
+                    <TodoAdd
+                        handleTaskAdd={handleTaskAdd}
+                    />
                 </div>
             </div>
             <br />
-            <ul className="list-group list-group-numbered">
-                {
-                    tasks.map((task, i) => (
-                        <li
-                            key={task.id}
-                            onClick={() => handleToggle(task.id)}
-                            className="list-group-item list-group-item-warning d-flex justify-content-between"
-                        >
-                            <div className={`ms-2 me-auto ${task.done && "text-decoration-line-through"}`}>
-                                {task.desc}
-                            </div>
-                            <button
-                                onClick={() => handleDelete(task.id)}
-                                className="btn btn-danger btn-sm"
-                            >Borrar</button>
-                        </li>
-                    ))
-                }
-            </ul>
+            <TodoList
+                tasks={tasks}
+                handleToggle={handleToggle}
+                handleDelete={handleDelete}
+            />
         </div>
     )
 }
