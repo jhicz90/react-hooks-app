@@ -20,14 +20,14 @@ const init = () => {
 
 export const TodoApp = () => {
 
-    const [todos, dispatch] = useReducer(TodoReducer, [], init)
+    const [tasks, dispatch] = useReducer(TodoReducer, [], init)
     const [{ desc }, handleInputChange, reset] = UseForm({ desc: '' })
 
     // console.log(desc)
 
     useEffect(() => {
-        localStorage.setItem('tasks',JSON.stringify(todos))
-    }, [todos])
+        localStorage.setItem('tasks', JSON.stringify(tasks))
+    }, [tasks])
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -47,13 +47,29 @@ export const TodoApp = () => {
         reset()
     }
 
+    const handleDelete = (taskId) => {
+        const action = {
+            type: 'delete',
+            payload: taskId
+        }
+
+        dispatch(action)
+    }
+
+    const handleToggle = (taskId) => {
+        dispatch({
+            type: 'toggle',
+            payload: taskId
+        })
+    }
+
     return (
         <div className="container p-3">
             <h1>Todo APP</h1>
             <hr />
             <div className="row">
                 <div className="col-2">
-                    <h4>{todos.length} Tarea{todos.length > 1 ? 's' : ''}</h4>
+                    <h4>{tasks.length} Tarea{tasks.length > 1 ? 's' : ''}</h4>
                 </div>
                 <div className="col-10">
                     <form onSubmit={handleSubmit}>
@@ -74,15 +90,19 @@ export const TodoApp = () => {
             <br />
             <ul className="list-group list-group-numbered">
                 {
-                    todos.map((task, i) => (
+                    tasks.map((task, i) => (
                         <li
                             key={task.id}
+                            onClick={() => handleToggle(task.id)}
                             className="list-group-item list-group-item-warning d-flex justify-content-between"
                         >
-                            <div className={`ms-2 me-auto ${task.done ? "text-decoration-line-through" : ""}`}>
+                            <div className={`ms-2 me-auto ${task.done && "text-decoration-line-through"}`}>
                                 {task.desc}
                             </div>
-                            <button className="btn btn-danger btn-sm">Borrar</button>
+                            <button
+                                onClick={() => handleDelete(task.id)}
+                                className="btn btn-danger btn-sm"
+                            >Borrar</button>
                         </li>
                     ))
                 }
