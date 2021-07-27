@@ -7,7 +7,6 @@ import {
 } from "react-router-dom"
 import { AboutScreen } from './AboutScreen'
 import { HomeScreen } from './HomeScreen'
-import { MainApp } from './MainApp'
 
 export const AppRouter = () => {
     return (
