@@ -7,6 +7,7 @@ import {
 } from "react-router-dom"
 import { AboutScreen } from './AboutScreen'
 import { HomeScreen } from './HomeScreen'
+import { LoginScreen } from './LoginScreen'
 
 export const AppRouter = () => {
     return (
@@ -22,6 +23,9 @@ export const AppRouter = () => {
                     <li>
                         <Link to="/home">Home</Link>
                     </li>
+                    <li>
+                        <Link to="/login">Login</Link>
+                    </li>
                 </ul>
 
                 <hr />
@@ -31,6 +35,7 @@ export const AppRouter = () => {
                     </Route>
                     <Route path="/about" component={AboutScreen} />
                     <Route path="/home" component={HomeScreen} />
+                    <Route path="/login" component={LoginScreen} />
                 </Switch>
             </>
         </Router>
